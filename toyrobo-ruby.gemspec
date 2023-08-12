@@ -1,10 +1,8 @@
 # frozen_string_literal: true
 
-require_relative "lib/toyrobo/ruby/version"
-
 Gem::Specification.new do |spec|
   spec.name = "toyrobo-ruby"
-  spec.version = Toyrobo::Ruby::VERSION
+  spec.version = "0.1.0"
   spec.authors = ["Carl Tablante"]
   spec.email = ["carlwilliam.tablante@gmail.com"]
 
