@@ -11,19 +11,23 @@ module Toyrobo
   class Robot
     ORIENTATIONS: [:north, :east, :south, :west]
     ORIENTATION_RANGES: {north: Integer, east: Integer, south: Integer, west: Integer}
+    COUNTER_CLOCKWISE: Integer
+    CLOCKWISE: Integer
     @plane: untyped
-    @x_position: Integer
-    @y_position: Integer
 
     attr_reader orientation: :east | :north | :south | :west
+    attr_reader x_position: Integer
+    attr_reader y_position: Integer
     def initialize: (untyped plane) -> void
     def current_position: -> ({x_position: Integer, y_position: Integer, orientation: :east | :north | :south | :west})
-    def orientation=: (:east | :north | :south | :west val) -> ({x_position: Integer, y_position: Integer, orientation: :east | :north | :south | :west})
     def place: (Integer x_coor, Integer y_coor, :east | :north | :south | :west direction) -> ({x_position: Integer, y_position: Integer, orientation: :east | :north | :south | :west})
     def report: -> String
     def move: -> ({x_position: Integer, y_position: Integer, orientation: :east | :north | :south | :west})
     def left: -> (:east | :north | :south | :west)
     def right: -> (:east | :north | :south | :west)
+
+    private
     def turn: (Integer numeric_direction) -> (:east | :north | :south | :west)
+    def orientation=: (:east | :north | :south | :west val) -> ({x_position: Integer, y_position: Integer, orientation: :east | :north | :south | :west})
   end
 end

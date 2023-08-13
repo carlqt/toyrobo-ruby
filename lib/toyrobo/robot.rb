@@ -3,6 +3,7 @@
 require_relative "robots/location_out_of_bounds_error"
 
 module Toyrobo
+  # Robot class represents a robot object. The robot object can move and spawn on the plane
   class Robot
     ORIENTATIONS = %i[north east south west].freeze
 
@@ -13,7 +14,12 @@ module Toyrobo
       west: -1
     }.freeze
 
-    attr_reader :orientation
+    COUNTER_CLOCKWISE = -1
+    CLOCKWISE = 1
+
+    attr_reader :orientation, :x_position, :y_position
+
+    private_constant :COUNTER_CLOCKWISE, :CLOCKWISE
 
     # Plane = cartesian_plane like object
     # raise exception if @plane.get(0, 0) is nil?
@@ -35,17 +41,6 @@ module Toyrobo
       }
     end
 
-    # val is :east
-    def orientation=(val)
-      if ORIENTATIONS.index(val).nil?
-        raise 'Unknown orientation'
-      end
-
-      @orientation = val
-
-      current_position
-    end
-
     def place(x_coor, y_coor, direction)
       raise Robots::LocationOutOfBoundsError if @plane.get(x_coor, y_coor).nil?
 
@@ -57,7 +52,7 @@ module Toyrobo
     end
 
     def report
-      "OUTPUT: #{@x_position}, #{@y_position}, #{orientation}"
+      "OUTPUT: #{@x_position}, #{@y_position}, #{orientation.upcase}"
     end
 
     # Orientation Ranges
@@ -66,31 +61,35 @@ module Toyrobo
 
       case orientation
       when :north, :south
-        place(@x_position, @y_position + range, orientation)
+        place(x_position, y_position + range, orientation)
       when :east, :west
-        place(@x_position, @y_position + range, orientation)
+        place(x_position + range, y_position, orientation)
       else
         raise Robots::LocationOutOfBoundsError
       end
     end
 
-    # north -> west -> south -> east
     def left
-      turn(-1)
+      turn(COUNTER_CLOCKWISE)
     end
 
-    # north -> east -> south -> west
     def right
-      turn(1)
+      turn(CLOCKWISE)
     end
+
+    private
 
     def turn(numeric_direction)
-      current_index = ORIENTATIONS.index(orientation)
-
-      raise "Unknown orientation" if current_index.nil?
+      current_index = ORIENTATIONS.index(orientation) # : Integer
 
       new_index = (current_index + numeric_direction) % ORIENTATIONS.size
       self.orientation = ORIENTATIONS[new_index]
+    end
+
+    def orientation=(val)
+      @orientation = val
+
+      current_position
     end
   end
 end
