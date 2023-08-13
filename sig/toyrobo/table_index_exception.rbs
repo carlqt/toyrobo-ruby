@@ -1,0 +1,9 @@
+# TypeProf 0.21.7
+
+# Classes
+module Toyrobo
+  module Tables
+    class TableIndexException < StandardError
+    end
+  end
+end

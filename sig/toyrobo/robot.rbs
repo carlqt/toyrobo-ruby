@@ -2,22 +2,28 @@
 
 # Classes
 module Toyrobo
+  module Robots
+    class LocationOutOfBoundsError < StandardError
+      def initialize: (?String msg) -> void
+    end
+  end
+
   class Robot
-    ORIENTATIONS: ["north", "east", "south", "west"]
-    ORIENTATION_RANGES: Hash[String, Integer]
+    ORIENTATIONS: [:north, :east, :south, :west]
+    ORIENTATION_RANGES: {north: Integer, east: Integer, south: Integer, west: Integer}
     @plane: untyped
     @x_position: Integer
     @y_position: Integer
 
-    attr_reader orientation: String
+    attr_reader orientation: :east | :north | :south | :west
     def initialize: (untyped plane) -> void
-    def current_position: -> {x_position: Integer, y_position: Integer, orientation: String}
-    def orientation=: (String val) -> {x_position: Integer, y_position: Integer, orientation: String}
-    def place: (Integer x_coor, Integer y_coor, String direction) -> {x_position: Integer, y_position: Integer, orientation: String}
-    def robot: -> String
-    def move: -> {x_position: Integer, y_position: Integer, orientation: String}
-    def left: -> String
-    def right: -> String
-    def turn: (Integer numeric_direction) -> String
+    def current_position: -> ({x_position: Integer, y_position: Integer, orientation: :east | :north | :south | :west})
+    def orientation=: (:east | :north | :south | :west val) -> ({x_position: Integer, y_position: Integer, orientation: :east | :north | :south | :west})
+    def place: (Integer x_coor, Integer y_coor, :east | :north | :south | :west direction) -> ({x_position: Integer, y_position: Integer, orientation: :east | :north | :south | :west})
+    def report: -> String
+    def move: -> ({x_position: Integer, y_position: Integer, orientation: :east | :north | :south | :west})
+    def left: -> (:east | :north | :south | :west)
+    def right: -> (:east | :north | :south | :west)
+    def turn: (Integer numeric_direction) -> (:east | :north | :south | :west)
   end
 end

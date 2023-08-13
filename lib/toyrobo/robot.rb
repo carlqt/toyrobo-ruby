@@ -1,14 +1,16 @@
 # frozen_string_literal: true
 
+require_relative "robots/location_out_of_bounds_error"
+
 module Toyrobo
   class Robot
-    ORIENTATIONS = %w[north east south west].freeze
+    ORIENTATIONS = %i[north east south west].freeze
 
     ORIENTATION_RANGES = {
-      "north" => 1,
-      "east" => 1,
-      "south" => -1,
-      "west" => -1
+      north: 1,
+      east: 1,
+      south: -1,
+      west: -1
     }.freeze
 
     attr_reader :orientation
@@ -17,7 +19,7 @@ module Toyrobo
     # raise exception if @plane.get(0, 0) is nil?
     def initialize(plane)
       @plane = plane
-      @orientation = "north"
+      @orientation = :north
 
       raise "Invalid Table" if @plane.get(0, 0).nil?
 
@@ -45,18 +47,16 @@ module Toyrobo
     end
 
     def place(x_coor, y_coor, direction)
-      raise 'Invalid placement' if @plane.get(x_coor, y_coor).nil?
-
-      # validation if direction isn't correct value
+      raise Robots::LocationOutOfBoundsError if @plane.get(x_coor, y_coor).nil?
 
       @x_position = x_coor
       @y_position = y_coor
-      @orientation = direction.downcase
+      @orientation = direction
 
       current_position
     end
 
-    def robot
+    def report
       "OUTPUT: #{@x_position}, #{@y_position}, #{orientation}"
     end
 
@@ -65,12 +65,12 @@ module Toyrobo
       range = ORIENTATION_RANGES[orientation]
 
       case orientation
-      when "north", "south"
+      when :north, :south
         place(@x_position, @y_position + range, orientation)
-      when "east", "west"
+      when :east, :west
         place(@x_position, @y_position + range, orientation)
       else
-        raise "Unkown Movement"
+        raise Robots::LocationOutOfBoundsError
       end
     end
 
