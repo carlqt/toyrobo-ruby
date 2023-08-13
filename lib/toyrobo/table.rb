@@ -39,7 +39,7 @@ class Table
 
     # x -> 2nd/inner index
     # y -> (length - 1) - y
-  rescue IndexError
+  rescue IndexError, TableIndexException
     nil
   end
 end

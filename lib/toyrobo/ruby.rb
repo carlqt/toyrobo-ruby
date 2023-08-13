@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'toyrobo/table'
+require 'toyrobo/robot'
 
 =begin
   Toyrobo.run
@@ -30,6 +31,8 @@ require 'toyrobo/table'
 module Toyrobo
   module Ruby
     class Error < StandardError; end
-    # Your code goes here...
+
+    def run
+    end
   end
 end

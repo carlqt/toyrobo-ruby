@@ -3,14 +3,20 @@
 # Classes
 module Toyrobo
   class Robot
-    ORIENTATIONS: {north: :north, south: :south, east: :east, west: :west}
-    @plane: untyped
+    ORIENTATIONS: [String, String, String, String]
+    @plane: Table
     @x_position: Integer
     @y_position: Integer
 
-    attr_reader orientation: :east | :north | :south | :west
-    def initialize: (untyped plane) -> void
-    def orientation=: (untyped val) -> (:east | :north | :south | :west)
-    def place: (untyped x, untyped y, untyped direction) -> nil
+    attr_reader orientation: String
+    def initialize: (Table plane) -> void
+    def current_position: -> {x_position: Integer, y_position: Integer, orientation: String}
+    def orientation=: (String val) -> String
+    def place: (Integer x_coor, Integer y_coor, String direction) -> untyped
+    def robot: -> String
+    def move: -> nil
+    def left: -> String
+    def right: -> String
+    def turn: (Integer numeric_direction) -> String
   end
 end
