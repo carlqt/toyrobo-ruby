@@ -9,7 +9,8 @@ module Toyrobo
 
     attr_accessor :orientation
 
-    def initialize
+    def initialize(plane)
+      @plane = plane
       @orientation = :north
     end
 
