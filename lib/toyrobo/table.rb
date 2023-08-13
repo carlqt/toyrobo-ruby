@@ -9,6 +9,8 @@ y [0,0][][][][]
 
 # cartesian plane style
 class Table
+  class TableIndexException < StandardError; end
+
   attr_reader :store
 
   def initialize(height, width)
@@ -17,14 +19,16 @@ class Table
   end
 
   # Only Positive integers
-  def get(x, y)
-    inner_index = x
-    outer_index = (@store.length - 1) - y
+  def get(x_coor, y_coor)
+    inner_index = x_coor
+    outer_index = (@store.length - 1) - y_coor
 
     # validation:
     # raise error if either inner_index or outer_index is negative
     # error if inner_index and outer_index are out_of_bounds (returns nil?)
-    raise IndexError.new("Negative index outside of array bounds") if [inner_index, outer_index].any?(&:negative?)
+    if [inner_index, outer_index].any?(&:negative?)
+      raise Table::TableIndexException.new("Negative index outside of array bounds") 
+    end
 
     # @store[outer_index][inner_index]
     @store.fetch(outer_index).fetch(inner_index)
@@ -35,7 +39,7 @@ class Table
 
     # x -> 2nd/inner index
     # y -> (length - 1) - y
-  rescue IndexError => e
+  rescue IndexError
     nil
   end
 end

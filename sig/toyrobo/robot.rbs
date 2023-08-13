@@ -1,0 +1,16 @@
+# TypeProf 0.21.7
+
+# Classes
+module Toyrobo
+  class Robot
+    ORIENTATIONS: {north: :north, south: :south, east: :east, west: :west}
+    @plane: untyped
+    @x_position: Integer
+    @y_position: Integer
+
+    attr_reader orientation: :east | :north | :south | :west
+    def initialize: (untyped plane) -> void
+    def orientation=: (untyped val) -> (:east | :north | :south | :west)
+    def place: (untyped x, untyped y, untyped direction) -> nil
+  end
+end

@@ -1,0 +1,11 @@
+# TypeProf 0.21.7
+
+# Classes
+class Table
+  attr_reader store: Array[Array[Integer]]
+  def initialize: (Integer height, Integer width) -> void
+  def get: (Integer x, Integer y) -> Integer?
+
+  class TableIndexException < StandardError
+  end
+end
