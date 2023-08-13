@@ -4,6 +4,13 @@ module Toyrobo
   class Robot
     ORIENTATIONS = %w[north east south west].freeze
 
+    ORIENTATION_RANGES = {
+      "north" => 1,
+      "east" => 1,
+      "south" => -1,
+      "west" => -1
+    }.freeze
+
     attr_reader :orientation
 
     # Plane = cartesian_plane like object
@@ -27,13 +34,14 @@ module Toyrobo
     end
 
     # val is :east
-    # 
     def orientation=(val)
       if ORIENTATIONS.index(val).nil?
         raise 'Unknown orientation'
       end
 
       @orientation = val
+
+      current_position
     end
 
     def place(x_coor, y_coor, direction)
@@ -44,6 +52,8 @@ module Toyrobo
       @x_position = x_coor
       @y_position = y_coor
       @orientation = direction.downcase
+
+      current_position
     end
 
     def robot
@@ -52,6 +62,16 @@ module Toyrobo
 
     # Orientation Ranges
     def move
+      range = ORIENTATION_RANGES[orientation]
+
+      case orientation
+      when "north", "south"
+        place(@x_position, @y_position + range, orientation)
+      when "east", "west"
+        place(@x_position, @y_position + range, orientation)
+      else
+        raise "Unkown Movement"
+      end
     end
 
     # north -> west -> south -> east
