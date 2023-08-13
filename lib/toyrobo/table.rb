@@ -9,6 +9,8 @@ y [0,0][][][][]
 
 # cartesian plane style
 class Table
+  attr_reader :store
+
   def initialize(height, width)
     row = Array.new(width) { 0 }
     @store = Array.new(height) { row }
@@ -16,6 +18,16 @@ class Table
 
   # Only Positive integers
   def get(x, y)
+    inner_index = x
+    outer_index = (@store.length - 1) - y
+
+    # validation:
+    # raise error if either inner_index or outer_index is negative
+    # error if inner_index and outer_index are out_of_bounds (returns nil?)
+    raise IndexError.new("Negative index outside of array bounds") if [inner_index, outer_index].any?(&:negative?)
+
+    # @store[outer_index][inner_index]
+    @store.fetch(outer_index).fetch(inner_index)
     # 0,0 = [4][0]
     # 3,1 = [3][3]
     # 2,1 = [3][2]
@@ -23,5 +35,7 @@ class Table
 
     # x -> 2nd/inner index
     # y -> (length - 1) - y
+  rescue IndexError => e
+    nil
   end
 end
