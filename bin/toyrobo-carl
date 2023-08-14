@@ -2,12 +2,7 @@
 # frozen_string_literal: true
 
 require "bundler/setup"
-require "toyrobo/table"
-require "toyrobo/robot"
 require "toyrobo/runner"
-require "toyrobo/lexer"
-require "toyrobo/parser"
-require "toyrobo/interpreter"
 require "optparse"
 
 ARGV << "-h" if ARGV.empty?
