@@ -10,7 +10,6 @@ module Toyrobo
     end
 
     # TODO: ADD Logic
-    # - Ignore command if Place is not the first command
     # - Ignore command if there is exception
     def run
       @commands.each do |c|

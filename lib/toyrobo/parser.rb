@@ -19,19 +19,11 @@ module Toyrobo
       while pending_tokens?
         t = @tokens[0]
 
-        if t.type == :command
-          if t.text == "place"
-            node = AST::Command.new(t.text, t.type)
-            consume
+        next if t.type != :command
 
-            parse_arguments(node)
-            next
-          end
-
-          # Else raise error
-          consume
-          @nodes << AST::Command.new(t.text, t.type)
-        end
+        node = AST::Command.new(t.text, t.type)
+        consume
+        parse_arguments(node)
       end
 
       @nodes
@@ -42,7 +34,7 @@ module Toyrobo
     end
 
     def parse_arguments(command_node)
-      while @tokens[0].type != :command
+      while @tokens[0] && @tokens[0].type != :command
         t = @tokens[0]
 
         param_node = t.type == :num ? AST::Num.new(t.text, t.type) : Toyrobo::AST::String.new(t.text, t.type)

@@ -37,5 +37,22 @@ RSpec.describe Toyrobo::Runner do
         expect { run }.to output("OUTPUT: 0,0,NORTH\n").to_stdout
       end
     end
+
+    context "when file is input5.txt" do
+      let(:input) { File.join(File.dirname(__FILE__), "../fixtures/runner/input5.txt") }
+
+      it "raises ArgumentError" do
+        expect { run }.to raise_error(ArgumentError)
+      end
+    end
+
+    # Raise Errno::ENOENT
+    context "when file does not exist" do
+      let(:input) { "unknown.txt" }
+
+      it "returns OUTPUT: 0,0,NORTH" do
+        expect { run }.to output("OUTPUT: 0,0,NORTH\n").to_stdout
+      end
+    end
   end
 end
