@@ -1,0 +1,12 @@
+# TypeProf 0.21.7
+
+# Classes
+module Toyrobo
+  class Runner
+    @robot: Toyrobo::Robot
+    @file: untyped
+
+    def initialize: -> void
+    def run: -> untyped
+  end
+end
