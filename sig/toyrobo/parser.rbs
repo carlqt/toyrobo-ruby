@@ -4,12 +4,13 @@
 module Toyrobo
   class Parser
     @tokens: Array[Lexers::Token]
+    @nodes: Array[AST::Command]
 
-    attr_reader nodes: Array[AST::Command]
     def initialize: (Array[Lexers::Token] tokens) -> void
-    def run: -> nil
+    def run: -> Array[AST::Command]
     def pending_tokens?: -> untyped
     def parse_arguments: (AST::Command command_node) -> Array[AST::Command]
     def consume: -> untyped
+    def nodes: -> Array[AST::Command]
   end
 end

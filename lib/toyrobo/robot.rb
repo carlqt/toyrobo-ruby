@@ -52,7 +52,7 @@ module Toyrobo
     end
 
     def report
-      "OUTPUT: #{@x_position}, #{@y_position}, #{orientation.upcase}"
+      "OUTPUT: #{@x_position},#{@y_position},#{orientation.upcase}"
     end
 
     # Orientation Ranges

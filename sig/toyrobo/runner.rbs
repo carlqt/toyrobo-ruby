@@ -4,9 +4,16 @@
 module Toyrobo
   class Runner
     @robot: Toyrobo::Robot
-    @file: untyped
+    @filename: String
+    @tokens: Array[Toyrobo::Lexers::Token]
+    @parser: Toyrobo::Parser
+    @interpreter: Toyrobo::Interpreter
 
     def initialize: -> void
     def run: -> untyped
+
+    private
+    def parser: -> Toyrobo::Parser
+    def interpreter: -> Toyrobo::Interpreter
   end
 end

@@ -4,6 +4,8 @@
 module Toyrobo
   module AST
     class Num
+      attr_reader value: ::String
+      attr_reader `type`: ::String
       def initialize: (::String value, Symbol `type`) -> void
     end
   end

@@ -4,6 +4,7 @@
 module Toyrobo
   module AST
     class Command
+      attr_reader value: ::String
       attr_accessor params: Array[Num | String]
       def initialize: (untyped value, untyped `type`) -> void
     end

@@ -56,7 +56,7 @@ RSpec.describe Toyrobo::Robot do
   describe "#report" do
     subject(:report) { robot.report }
 
-    it { is_expected.to eq "OUTPUT: 0, 0, NORTH" }
+    it { is_expected.to eq "OUTPUT: 0,0,NORTH" }
   end
 
   describe "#move" do

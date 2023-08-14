@@ -8,8 +8,6 @@ require_relative "ast/command"
 module Toyrobo
   # Parser tokens and transforms into a small asts
   class Parser
-    attr_reader :nodes
-
     def initialize(tokens)
       @tokens = tokens
       @nodes = []
@@ -35,6 +33,8 @@ module Toyrobo
           @nodes << AST::Command.new(t.text, t.type)
         end
       end
+
+      @nodes
     end
 
     def pending_tokens?
@@ -56,11 +56,11 @@ module Toyrobo
     def consume
       @tokens.shift
     end
+
+    def nodes
+      return @nodes unless @nodes.empty?
+
+      run
+    end
   end
 end
-
-# Parsing
-# If token is command
-# If token is == 'place' -> We expect parameters
-# else
-# Node.new(token)

@@ -1,0 +1,14 @@
+# TypeProf 0.21.7
+
+# Classes
+module Toyrobo
+  class Interpreter
+    @commands: Array[Toyrobo::AST::Command]
+    @robot: untyped
+
+    def initialize: (Array[Toyrobo::AST::Command] command_nodes, untyped robot) -> void
+    def run: -> untyped
+    def report: -> nil
+    def format_params: (Array[Toyrobo::AST::Num | Toyrobo::AST::String] params) -> Array[Integer | Symbol]
+  end
+end
