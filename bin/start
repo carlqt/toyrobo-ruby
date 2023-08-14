@@ -3,7 +3,6 @@
 
 # forzen_string_literal: true
 
-require "pry"
 require "bundler/setup"
 require "toyrobo/table"
 require "toyrobo/robot"

@@ -3,8 +3,8 @@
 target :lib do
   signature "sig"
 
-  check "lib/toyrobo"                       # Directory name
-  check "Gemfile"                   # File name
+  check "lib/toyrobo" # Directory name
+  # check "Gemfile"                   # File name
   # check "app/models/**/*.rb"        # Glob
   # ignore "lib/templates/*.rb"
 
