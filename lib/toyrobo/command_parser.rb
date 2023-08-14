@@ -12,14 +12,13 @@ module Toyrobo
 
     def tokenize
       @input.each do |text|
-        token = CommandParsers::Token.new
         command, args = text.split(" ")
 
-        if CommandParsers::Token::COMMANDS.any? { |s| s.casecmp(command)&.zero? }
-          token.type = :command
-          token.text = command
+        if command.nil? || CommandParsers::Token::COMMANDS.none? { |s| s.casecmp(command)&.zero? }
+          raise CommandParsers::NoCommandError
         end
 
+        token = CommandParsers::Token.new(:command, command)
         token.args = args.split(",") unless args.nil?
 
         @tokens << token

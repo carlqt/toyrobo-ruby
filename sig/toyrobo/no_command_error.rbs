@@ -1,0 +1,10 @@
+# TypeProf 0.21.7
+
+# Classes
+module Toyrobo
+  module CommandParsers
+    class NoCommandError < StandardError
+      def initialize: (?String msg) -> void
+    end
+  end
+end
