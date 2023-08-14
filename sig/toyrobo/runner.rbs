@@ -9,7 +9,7 @@ module Toyrobo
     @parser: Toyrobo::Parser
     @interpreter: Toyrobo::Interpreter
 
-    def initialize: -> void
+    def initialize: (String input_file) -> void
     def run: -> untyped
 
     private

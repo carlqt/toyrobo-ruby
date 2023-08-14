@@ -10,8 +10,8 @@ module Toyrobo
   # Entrypoint to run the application
   class Runner
     # TODO: filename and table dimensions should come from params
-    def initialize
-      @filename = "input.txt"
+    def initialize(input_file)
+      @filename = input_file
       @robot = Toyrobo::Robot.new
       @tokens = []
     end
