@@ -4,7 +4,7 @@
 module Toyrobo
   module Lexers
     class NoCommandError < StandardError
-      def initialize: (?String msg) -> void
+      def initialize: (?String? msg) -> void
     end
   end
 end

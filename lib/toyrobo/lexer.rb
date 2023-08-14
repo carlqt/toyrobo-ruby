@@ -23,7 +23,7 @@ module Toyrobo
         cmd, args = text.split(" ")
 
         if cmd.nil? || Lexers::Token::COMMANDS[cmd.downcase.to_sym].nil?
-          raise Lexers::NoCommandError
+          raise Lexers::NoCommandError, cmd
         end
 
         @tokens << Lexers::Token.new(:command, cmd.downcase)
