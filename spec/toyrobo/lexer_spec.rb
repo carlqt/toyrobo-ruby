@@ -33,5 +33,13 @@ RSpec.describe Toyrobo::Lexer do
         expect(token2.text).to eq "1"
       end
     end
+
+    context "when input contains unknown command" do
+      let(:input) { "FLY" }
+
+      it "raises NoCommandError error" do
+        expect { tokenize }.to raise_error(Toyrobo::Lexers::NoCommandError)
+      end
+    end
   end
 end
