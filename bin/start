@@ -1,12 +1,26 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
+
+# forzen_string_literal: true
 
 require "pry"
 require "bundler/setup"
 require "toyrobo/table"
 require "toyrobo/robot"
 require "toyrobo/runner"
+require "optparse"
 
-# You can add fixtures and/or initialization code here to make experimenting
-# with your gem easier. You can also use a different console, if you like.
+options = {}
+OptionParser.new do |parser|
+  parser.banner = "Usage: toyrobo [options]"
+  parser.separator ""
 
-Toyrobo::Runner.new.run
+  parser.on("-f", "--filename FILENAME", "filepath")
+
+  parser.on("-h", "--help", "Show this message") do
+    puts parser
+    exit
+  end
+end.parse!(into: options)
+
+Toyrobo::Runner.new(options[:filename]).run

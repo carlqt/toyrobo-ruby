@@ -9,7 +9,7 @@ require "toyrobo/interpreter"
 module Toyrobo
   # Entrypoint to run the application
   class Runner
-    # TODO: filename and table dimensions should come from params
+    # TODO: table dimensions should come from params
     def initialize(input_file)
       @filename = input_file
       @robot = Toyrobo::Robot.new
