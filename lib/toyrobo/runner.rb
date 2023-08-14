@@ -12,8 +12,7 @@ module Toyrobo
     # TODO: filename and table dimensions should come from params
     def initialize
       @filename = "input.txt"
-      table = Toyrobo::Table.new(5, 5)
-      @robot = Toyrobo::Robot.new(table)
+      @robot = Toyrobo::Robot.new
       @tokens = []
     end
 

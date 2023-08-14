@@ -23,7 +23,7 @@ module Toyrobo
 
     # Plane = cartesian_plane like object
     # raise exception if @plane.get(0, 0) is nil?
-    def initialize(plane)
+    def initialize(plane = Toyrobo::Table.new)
       @plane = plane
       @orientation = :north
 

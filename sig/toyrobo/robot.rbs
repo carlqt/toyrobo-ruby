@@ -18,7 +18,7 @@ module Toyrobo
     attr_reader orientation: :east | :north | :south | :west
     attr_reader x_position: Integer
     attr_reader y_position: Integer
-    def initialize: (untyped plane) -> void
+    def initialize: (?Toyrobo::Table plane) -> void
     def current_position: -> ({x_position: Integer, y_position: Integer, orientation: :east | :north | :south | :west})
     def place: (Integer x_coor, Integer y_coor, :east | :north | :south | :west direction) -> ({x_position: Integer, y_position: Integer, orientation: :east | :north | :south | :west})
     def report: -> String

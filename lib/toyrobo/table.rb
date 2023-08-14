@@ -9,7 +9,7 @@ module Toyrobo
   class Table
     attr_reader :store
 
-    def initialize(height, width)
+    def initialize(height = 5, width = 5)
       row = Array.new(width) { 0 }
       @store = Array.new(height) { row }
     end
