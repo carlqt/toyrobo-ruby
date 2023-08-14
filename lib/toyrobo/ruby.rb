@@ -2,7 +2,6 @@
 
 require "toyrobo/table"
 require "toyrobo/robot"
-require "toyrobo/command_parser"
 require "toyrobo/lexer"
 require "toyrobo/parser"
 

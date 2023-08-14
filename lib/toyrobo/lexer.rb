@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "lexers/no_command_error"
+require_relative "lexers/token"
 
 module Toyrobo
   # Parses input strings
