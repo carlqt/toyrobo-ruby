@@ -1,16 +1,13 @@
 # frozen_string_literal: true
 
 module Toyrobo
-  # Responsible for interpreting the command nodes to
-  # run the app properly
+  # Responsible for interpreting the command nodes to run the app properly
   class Interpreter
     def initialize(command_nodes, robot)
       @commands = command_nodes
       @robot = robot
     end
 
-    # TODO: ADD Logic
-    # - Ignore command if there is exception
     def run
       @commands.each do |c|
         next @robot.send(c.value, *format_params(c.params)) unless c.params.empty?

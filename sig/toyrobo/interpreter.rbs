@@ -4,11 +4,10 @@
 module Toyrobo
   class Interpreter
     @commands: Array[Toyrobo::AST::Command]
-    @robot: untyped
+    @robot: Toyrobo::Robot
 
-    def initialize: (Array[Toyrobo::AST::Command] command_nodes, untyped robot) -> void
+    def initialize: (Array[Toyrobo::AST::Command] command_nodes, Toyrobo::Robot robot) -> void
     def run: -> untyped
-    def report: -> nil
     def format_params: (Array[Toyrobo::AST::Num | Toyrobo::AST::String] params) -> Array[Integer | Symbol]
   end
 end
