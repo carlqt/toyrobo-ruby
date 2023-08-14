@@ -22,13 +22,10 @@ module Toyrobo
     private_constant :COUNTER_CLOCKWISE, :CLOCKWISE
 
     # Plane = cartesian_plane like object
-    # raise exception if @plane.get(0, 0) is nil?
+    # Any structure the has a "get" function
     def initialize(plane = Toyrobo::Table.new)
       @plane = plane
       @orientation = :north
-
-      raise "Invalid Table" if @plane.get(0, 0).nil?
-
       @x_position = 0
       @y_position = 0
     end

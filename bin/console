@@ -5,7 +5,7 @@ require "pry"
 require "bundler/setup"
 require "toyrobo/table"
 require "toyrobo/robot"
-require "toyrobo/ruby"
+require "toyrobo/runner"
 require "toyrobo/lexer"
 
 # You can add fixtures and/or initialization code here to make experimenting
