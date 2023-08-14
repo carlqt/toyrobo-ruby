@@ -66,13 +66,13 @@ module Toyrobo
         parser = Toyrobo::Parser.new(tokens.flatten)
         parser.run
 
-        # Interpreter.new(tokens.flatten, @robot).run
+        Interpreter.new(parser.nodes, @robot).run
       end
     end
 
     class Interpreter
-      def initialize(command_tokens, robot)
-        @commands = command_tokens
+      def initialize(command_nodes, robot)
+        @commands = command_nodes
         @robot = robot
       end
 
@@ -82,27 +82,35 @@ module Toyrobo
       # - 
       def run
         @commands.each do |c|
-          case c.text.downcase
-          when "place"
-            place(c)
-          when "report"
-            report
-          when "move"
-            move
+          if c.params.empty?
+            if c.value == "report"
+              puts @robot.send(c.value)
+            else
+              @robot.send(c.value)
+            end
+          else
+            @robot.send(c.value, *format_params(c.params))
           end
+          # if c is command
+          # if c.params.empty?
+          # @robot.send(c)
+          # else
+          # @robot.send(c, *format_params(c.params))
         end
-      end
-
-      def move
-        @robot.move
-      end
-
-      def place(c)
-        @robot.place(c.args[0].to_i, c.args[1].to_i, c.args[2].downcase.to_sym)
       end
 
       def report
         puts @robot.report
+      end
+
+      def format_params(params)
+        params.map do |param|
+          if param.type == :num
+            param.value.to_i
+          else param.type == :string
+            param.value.downcase.to_sym
+          end
+        end
       end
     end
   end

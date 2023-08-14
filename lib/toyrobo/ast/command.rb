@@ -5,8 +5,8 @@ module Toyrobo
     class Command < Node
       attr_accessor :params
 
-      def initialize(value)
-        super(value)
+      def initialize(value, type)
+        super(value, type)
         @params = []
       end
     end

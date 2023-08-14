@@ -4,6 +4,7 @@
 module Toyrobo
   class Parser
     @tokens: Array[CommandParsers::Token]
+    @nodes: Array[untyped]
 
     def initialize: (Array[CommandParsers::Token] tokens) -> void
     def run: -> untyped

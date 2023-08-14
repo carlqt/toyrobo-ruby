@@ -3,9 +3,6 @@
 module Toyrobo
   module AST
     class Num < Node
-      def initialize(value)
-        super(value)
-      end
     end
   end
 end
