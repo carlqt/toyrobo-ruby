@@ -1,0 +1,10 @@
+# TypeProf 0.21.7
+
+# Classes
+module Toyrobo
+  module AST
+    class Num
+      def initialize: (::String value, Symbol `type`) -> void
+    end
+  end
+end

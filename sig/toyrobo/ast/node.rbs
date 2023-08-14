@@ -1,0 +1,12 @@
+# TypeProf 0.21.7
+
+# Classes
+module Toyrobo
+  module AST
+    class Node
+      attr_reader value: String
+      attr_reader type: Symbol
+      def initialize: (String value, Symbol `type`) -> void
+    end
+  end
+end

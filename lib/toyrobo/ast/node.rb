@@ -2,8 +2,9 @@
 
 module Toyrobo
   module AST
+    # Representation of a single Node in an AST
     class Node
-      attr_accessor :value, :type
+      attr_reader :value, :type
 
       def initialize(value, type)
         @value = value

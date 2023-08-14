@@ -7,10 +7,10 @@ module Toyrobo
       COMMANDS: Hash[Symbol, Symbol]
       TYPES: Hash[Symbol, Symbol]
 
-      attr_accessor type: Symbol?
-      attr_accessor text: String?
+      attr_accessor type: Symbol
+      attr_accessor text: String
       attr_accessor args: untyped
-      def initialize: (?Symbol | nil, ?String | nil) -> void
+      def initialize: (Symbol, String) -> void
     end
   end
 end

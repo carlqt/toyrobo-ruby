@@ -20,7 +20,7 @@ module Toyrobo
 
       attr_accessor :type, :text, :args
 
-      def initialize(type = nil, text = nil)
+      def initialize(type, text)
         @type = type
         @text = text
       end

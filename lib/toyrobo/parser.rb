@@ -23,7 +23,7 @@ module Toyrobo
 
         if t.type == :command
           if t.text == "place"
-            node = Toyrobo::AST::Command.new(t.text, t.type)
+            node = AST::Command.new(t.text, t.type)
             consume
 
             parse_arguments(node)
@@ -32,7 +32,7 @@ module Toyrobo
 
           # Else raise error
           consume
-          @nodes << Toyrobo::AST::Command.new(t.text, t.type)
+          @nodes << AST::Command.new(t.text, t.type)
         end
       end
     end
@@ -45,7 +45,7 @@ module Toyrobo
       while @tokens[0].type != :command
         t = @tokens[0]
 
-        param_node = t.type == :num ? Toyrobo::AST::Num.new(t.text, t.type) : Toyrobo::AST::String.new(t.text, t.type)
+        param_node = t.type == :num ? AST::Num.new(t.text, t.type) : Toyrobo::AST::String.new(t.text, t.type)
         command_node.params << param_node
         consume
       end
