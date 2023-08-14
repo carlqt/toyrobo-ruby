@@ -1,0 +1,11 @@
+# TypeProf 0.21.7
+
+# Classes
+module Toyrobo
+  class Parser
+    @tokens: Array[CommandParsers::Token]
+
+    def initialize: (Array[CommandParsers::Token] tokens) -> void
+    def run: -> untyped
+  end
+end

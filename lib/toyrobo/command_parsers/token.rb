@@ -4,7 +4,19 @@ module Toyrobo
   module CommandParsers
     # Representation of instructions to our Toyrobot App
     class Token
-      COMMANDS = %w[place move left right report].freeze
+      COMMANDS = {
+        place: :place,
+        move: :move,
+        left: :left,
+        right: :right,
+        report: :report
+      }.freeze
+
+      TYPES = {
+        command: :command,
+        num: :num,
+        string: :string
+      }.freeze
 
       attr_accessor :type, :text, :args
 

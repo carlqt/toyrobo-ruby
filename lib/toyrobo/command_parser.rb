@@ -12,25 +12,67 @@ module Toyrobo
 
     def tokenize
       @input.each do |text|
-        command, args = text.split(" ")
+        cmd, args = text.split(" ")
 
-        if command.nil? || CommandParsers::Token::COMMANDS.none? { |s| s.casecmp(command)&.zero? }
+        if cmd.nil? || CommandParsers::Token::COMMANDS[cmd.downcase].nil?
           raise CommandParsers::NoCommandError
         end
 
-        token = CommandParsers::Token.new(:command, command)
-        token.args = args.split(",") unless args.nil?
+        @tokens << CommandParsers::Token.new(:command, cmd.downcase)
+        @tokens += tokenize_params(args)
 
-        @tokens << token
+        # Parsers::Command.new(command).tokenize
+        # Parsers::Arg.new(args).tokenize
+
+        # if command.nil? || CommandParsers::Token::COMMANDS.none? { |s| s.casecmp(command)&.zero? }
+        #   raise CommandParsers::NoCommandError
+        # end
+
+        # token = CommandParsers::Token.new(:command, command)
+        # token.args = args.split(",") unless args.nil?
+        # args.split(",").each {}
+
+        # @tokens << token
       end
 
       @tokens.flatten
     end
+    def tokenize_params(params_string)
+      params_string.split(",").map do |val|
+        if number?(val)
+          CommandParsers::Token.new(:params, val.to_i)
+        else
+          CommandParsers::Token.new(:params, val.to_sym)
+        end
+      end
+    end
 
+    def number?(input)
+      input.to_i.to_s == input
+    end
+
+    def string?(input)
+      !number?(input)
+    end
     def tokens
       return @tokens unless @tokens.empty?
 
-      @tokens ||= tokenize
+      tokenize
     end
   end
 end
+
+# command parser and argument parser
+
+# Parser
+# - Splits line in 2
+# - Send first element to CommandParser
+# - Send 2nd element to ArgParser
+
+# CommandParser
+# - checks if string is correct
+# - returns a Token
+
+# ArgParser
+# - Splits arguments into tokens
+# - Coerce parameters to correct types int and symbols

@@ -1,16 +1,12 @@
 #!/usr/bin/env ruby
-# frozen_string_literal: true
 
 require "pry"
 require "bundler/setup"
 require "toyrobo/table"
 require "toyrobo/robot"
 require "toyrobo/ruby"
-require "toyrobo/lexer"
 
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
-t = Toyrobo::Table.new(5,5)
-r = Toyrobo::Robot.new(t)
 
-Pry.start(__FILE__)
+Toyrobo::Ruby::Runner.new.run

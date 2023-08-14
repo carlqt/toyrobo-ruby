@@ -1,0 +1,16 @@
+# TypeProf 0.21.7
+
+# Classes
+module Toyrobo
+  class Lexer
+    @input: Array[String]
+    @tokens: Array[CommandParsers::Token]
+
+    def initialize: (String input_string) -> void
+    def tokenize: -> Array[CommandParsers::Token]
+    def tokenize_params: (String params_string) -> Array[CommandParsers::Token]
+    def number?: (String input) -> bool
+    def string?: (String input) -> bool
+    def tokens: -> Array[CommandParsers::Token]
+  end
+end

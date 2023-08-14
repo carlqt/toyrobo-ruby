@@ -4,12 +4,13 @@
 module Toyrobo
   module CommandParsers
     class Token
-      COMMANDS: [String, String, String, String, String]
+      COMMANDS: Hash[Symbol, Symbol]
+      TYPES: Hash[Symbol, Symbol]
 
       attr_accessor type: Symbol?
       attr_accessor text: String?
       attr_accessor args: untyped
-      def initialize: (?Symbol `type`, ?String text) -> void
+      def initialize: (?Symbol | nil, ?String | nil) -> void
     end
   end
 end
