@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Toyrobo
-  module CommandParsers
+  module Lexers
     # Exceptions to raise when table receives a negative x,y arguments
     class NoCommandError < StandardError
       def initialize(msg = "Command is invalid")

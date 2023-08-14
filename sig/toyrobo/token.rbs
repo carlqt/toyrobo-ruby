@@ -2,7 +2,7 @@
 
 # Classes
 module Toyrobo
-  module CommandParsers
+  module Lexers
     class Token
       COMMANDS: Hash[Symbol, Symbol]
       TYPES: Hash[Symbol, Symbol]

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Toyrobo
-  module CommandParsers
+  module Lexers
     # Representation of instructions to our Toyrobot App
     class Token
       COMMANDS = {

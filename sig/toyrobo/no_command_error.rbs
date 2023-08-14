@@ -2,7 +2,7 @@
 
 # Classes
 module Toyrobo
-  module CommandParsers
+  module Lexers
     class NoCommandError < StandardError
       def initialize: (?String msg) -> void
     end

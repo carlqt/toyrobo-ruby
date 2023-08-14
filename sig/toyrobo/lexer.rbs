@@ -4,13 +4,13 @@
 module Toyrobo
   class Lexer
     @input: Array[String]
-    @tokens: Array[CommandParsers::Token]
+    @tokens: Array[Lexers::Token]
 
     def initialize: (String input_string) -> void
-    def tokenize: -> Array[CommandParsers::Token]
-    def tokenize_params: (String params_string) -> Array[CommandParsers::Token]
+    def tokenize: -> Array[Lexers::Token]
+    def tokenize_params: (String params_string) -> Array[Lexers::Token]
     def number?: (String input) -> bool
     def string?: (String input) -> bool
-    def tokens: -> Array[CommandParsers::Token]
+    def tokens: -> Array[Lexers::Token]
   end
 end

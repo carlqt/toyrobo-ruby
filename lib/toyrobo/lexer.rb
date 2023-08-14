@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative "command_parsers/no_command_error"
+require_relative "lexers/no_command_error"
 
 module Toyrobo
   # Parses input strings
@@ -14,11 +14,11 @@ module Toyrobo
       @input.each do |text|
         cmd, args = text.split(" ")
 
-        if cmd.nil? || CommandParsers::Token::COMMANDS[cmd.downcase.to_sym].nil?
-          raise CommandParsers::NoCommandError
+        if cmd.nil? || Lexers::Token::COMMANDS[cmd.downcase.to_sym].nil?
+          raise Lexers::NoCommandError
         end
 
-        @tokens << CommandParsers::Token.new(:command, cmd.downcase)
+        @tokens << Lexers::Token.new(:command, cmd.downcase)
         @tokens += tokenize_params(args) unless args.nil?
       end
 
@@ -28,7 +28,7 @@ module Toyrobo
     def tokenize_params(params_string)
       params_string.split(",").map do |val|
         param_type = number?(val) ? :num : :string
-        CommandParsers::Token.new(param_type, val)
+        Lexers::Token.new(param_type, val)
       end
     end
 
