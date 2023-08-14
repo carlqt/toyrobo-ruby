@@ -1,11 +1,5 @@
 # frozen_string_literal: true
 
-require "toyrobo/table"
-require "toyrobo/robot"
-require "toyrobo/lexer"
-require "toyrobo/parser"
-require "toyrobo/interpreter"
-
 module Toyrobo
   # Entrypoint to run the application
   class Runner
