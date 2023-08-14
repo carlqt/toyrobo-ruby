@@ -6,15 +6,15 @@ require_relative "ast/string"
 require_relative "ast/command"
 
 module Toyrobo
-  # Parser tokens and transforms into a small asts
+  # The Parser takes a sequence of tokens and produces a data structure that can be understood by the interpreter.
+  # The data structure is usually an AST but given that the problem is quite simple, it's a list
+  # The main responsibility of the parser is to piece together the tokens and associate the commands to their parameters
   class Parser
     def initialize(tokens)
       @tokens = tokens
       @nodes = []
     end
 
-    # [Token(command), Token(num), Token(num), Token(string)]
-    # [Token(command)]
     def run
       while pending_tokens?
         t = @tokens[0]
