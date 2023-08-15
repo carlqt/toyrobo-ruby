@@ -3,7 +3,7 @@ name: Ruby
 on:
   push:
     branches:
-      - fix-github-action
+      - main
 
   pull_request:
 

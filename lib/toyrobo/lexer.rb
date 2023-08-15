@@ -22,9 +22,7 @@ module Toyrobo
       @input.each do |text|
         cmd, args = text.split(" ")
 
-        if cmd.nil? || Lexers::Token::COMMANDS[cmd.downcase.to_sym].nil?
-          raise Lexers::NoCommandError, cmd
-        end
+        raise(Lexers::NoCommandError, cmd) if cmd.nil? || Lexers::Token::COMMANDS[cmd.downcase.to_sym].nil?
 
         @tokens << Lexers::Token.new(:command, cmd.downcase)
         @tokens += tokenize_params(args) unless args.nil?
