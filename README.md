@@ -24,16 +24,16 @@ Clone the repository then run `bundle install` to install the dependencies.
 
 Then run `rake build && rake install` to build and install.
 
-Another approach is this repository contains the .exe file that you can run without installing. Simply run `./bin/toyrobo-carl` for the same effect.
-
 Run `rake spec` to run tests
 ## Usage
 
-Run `toyrobo-carl` to see the CLI help and to run, provide a input file using the `-f` option. e.g.
+Run `toyrobo-carl` to see the CLI help. To run, provide an input file using the `-f` option. e.g.
 
 `toyrobo-carl -f spec/fixtures/runner/input1.txt`
 
 Example inputs can be found on `spec/fixtures/runner` directory
+
+Another approach, this repository contains an exe file that you can run without installing. Simply run `./bin/toyrobo-carl` for the same effect.
 
 ## Improvements
 The input right now requires a filename and it's not able to pipe inputs from stdin.
