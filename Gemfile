@@ -14,6 +14,3 @@ gem "rspec", "~> 3.0"
 gem "rubocop", "~> 1.21"
 
 gem "steep", require: false
-
-# Dependency of rubocop
-gem "rubocop-rubycw"
