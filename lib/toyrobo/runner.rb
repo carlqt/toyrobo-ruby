@@ -11,7 +11,6 @@ require_relative "validations/input_file_validation"
 module Toyrobo
   # Entrypoint to run the application
   class Runner
-    # TODO: table dimensions should come from params
     def initialize(options)
       @filename = options[:filename]
       @table_dimensions = options[:dimensions] || "5x5"

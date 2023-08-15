@@ -47,12 +47,20 @@ RSpec.describe Toyrobo::Runner do
       end
     end
 
-    # Raise Errno::ENOENT
     context "when file does not exist" do
       let(:input) { "unknown.txt" }
 
-      it "returns OUTPUT: 0,0,NORTH" do
-        expect { run }.to output("File not found").to_stdout
+      it "raises RuntimeError with message File not found" do
+        expect { run }.to raise_error(RuntimeError, "File not found")
+      end
+    end
+
+    context "when dimension option has invalid format" do
+      let(:filename) { File.join(File.dirname(__FILE__), "../fixtures/runner/input5.txt") }
+      let(:options) { { filename:, dimensions: "1,1" } }
+
+      it "raises RuntimeError with message 'Invalid table dimension format'" do
+        expect { run }.to raise_error(RuntimeError, "Invalid table dimension format")
       end
     end
   end
