@@ -49,7 +49,7 @@ module Toyrobo
     end
 
     def table
-      length, width = @table_dimensions.split("x").map(&:to_i) # : Array[Integer]
+      length, width = @table_dimensions.split("x").map(&:to_i)
 
       Toyrobo::Table.new(length || 5, width || 5)
     end

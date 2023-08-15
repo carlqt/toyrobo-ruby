@@ -1,34 +1,39 @@
 # Toyrobo::Ruby
 
-TODO: Delete this and the text below, and describe your gem
+This is my implementation of the Toyrobot problem. It uses Ruby 3.2.2 and rbs for type annotations
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/toyrobo/ruby`. To experiment with that code, run `bin/console` for an interactive prompt.
+## Design
+
+The design makes use of Ruby's metaprogramming to handle sending the commands to the Robot.
+
+The Robot is injected with the table dependency so that it can roam around it.
+
+Parsing the commands from the file is done by using `lexer.rb` to tokenize the inputs. This would also identify any invalid command inputs.
+
+After tokenizing the inputs, the tokens will then be used in `parser.rb` to analyze and create a structure (Very lightweight AST) that the Interpreter could understand. This includes association any arguments to commands when provided.
+
+Lastly, `interpreter.rb` will read the structure and issue the commands to the robot.
+
+The project uses `Steep` for type checking and `rbs` for type annotations.
 
 ## Installation
 
-TODO: Replace `UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG` with your gem name right after releasing it to RubyGems.org. Please do not do it earlier due to security reasons. Alternatively, replace this section with instructions to install your gem from git if you don't plan to release to RubyGems.org.
+The requirement is to have Ruby 3.2.2
 
-Install the gem and add to the application's Gemfile by executing:
+Clone the repository then run `bundle install` to install the dependencies.
 
-    $ bundle add UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
+Then run `rake build && rake install` to build and install.
 
-If bundler is not being used to manage dependencies, install the gem by executing:
+Another approach is this repository contains the .exe file that you can run without installing. Simply run `./bin/toyrobo-carl` for the same effect.
 
-    $ gem install UPDATE_WITH_YOUR_GEM_NAME_PRIOR_TO_RELEASE_TO_RUBYGEMS_ORG
-
+Run `rake spec` to run tests
 ## Usage
 
-TODO: Write usage instructions here
+Run `toyrobo-carl` to see the CLI help and to run, provide a input file using the `-f` option. e.g.
 
-## Development
+`toyrobo-carl -f spec/fixtures/runner/input1.txt`
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/toyrobo-ruby.
+Example inputs can be found on `spec/fixtures/runner` directory
 
 ## License
 
