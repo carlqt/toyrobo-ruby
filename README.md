@@ -35,6 +35,9 @@ Run `toyrobo-carl` to see the CLI help and to run, provide a input file using th
 
 Example inputs can be found on `spec/fixtures/runner` directory
 
+## Improvements
+The input right now requires a filename and it's not able to pipe inputs from stdin.
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
