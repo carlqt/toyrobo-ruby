@@ -1,0 +1,14 @@
+# TypeProf 0.21.7
+
+# Classes
+module Toyrobo
+  module Validations
+    class TableDimensionsValidation
+      @dimensions: String
+
+      def self.valid?: (String dimensions) -> bool
+      def initialize: (String dimensions) -> void
+      def valid?: -> bool
+    end
+  end
+end

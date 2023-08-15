@@ -2,6 +2,7 @@
 
 module Toyrobo
   module Validations
+    # Validation for input dimensions
     class TableDimensionsValidation
       def self.valid?(dimensions)
         new(dimensions).valid?

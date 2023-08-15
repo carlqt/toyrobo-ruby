@@ -2,6 +2,7 @@
 
 module Toyrobo
   module Validations
+    # Validates input file
     class InputFileValidation
       def self.valid?(input)
         new(input).valid?

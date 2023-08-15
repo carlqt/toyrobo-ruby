@@ -1,0 +1,14 @@
+# TypeProf 0.21.7
+
+# Classes
+module Toyrobo
+  module Validations
+    class InputFileValidation
+      @input: String
+
+      def self.valid?: (String input) -> bool
+      def initialize: (String input) -> void
+      def valid?: -> bool
+    end
+  end
+end
