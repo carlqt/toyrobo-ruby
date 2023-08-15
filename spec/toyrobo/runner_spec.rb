@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe Toyrobo::Runner do
-  let(:runner) { described_class.new(input) }
+  let(:runner) { described_class.new(options) }
+  let(:options) { { filename: input } }
 
   describe "#run" do
     subject(:run) { runner.run }
@@ -51,7 +52,7 @@ RSpec.describe Toyrobo::Runner do
       let(:input) { "unknown.txt" }
 
       it "returns OUTPUT: 0,0,NORTH" do
-        expect { run }.to output("OUTPUT: 0,0,NORTH\n").to_stdout
+        expect { run }.to output("File not found").to_stdout
       end
     end
   end
