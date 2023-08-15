@@ -8,12 +8,18 @@ module Toyrobo
     @tokens: Array[Toyrobo::Lexers::Token]
     @parser: Toyrobo::Parser
     @interpreter: Toyrobo::Interpreter
+    @table_dimensions: String
 
-    def initialize: (String input_file) -> void
+    def initialize: (Hash[Symbol, String] input_file) -> void
     def run: -> untyped
 
     private
     def parser: -> Toyrobo::Parser
     def interpreter: -> Toyrobo::Interpreter
+    def validate_table_dimensions: -> nil
+    def robot: -> Toyrobo::Robot
+    def table: -> Toyrobo::Table
+    def validate_file: -> nil
+    def validate!: -> nil
   end
 end
