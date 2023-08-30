@@ -3,7 +3,9 @@
 # Classes
 module Toyrobo
   class Table
-    attr_reader store: Array[Array[Integer]]
+    attr_reader height: Range[Integer]
+    attr_reader width: Range[Integer]
+
     def initialize: (?Integer height, ?Integer width) -> void
     def get: (Integer x_coor, Integer y_coor) -> Integer?
   end

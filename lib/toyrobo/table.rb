@@ -7,21 +7,16 @@ module Toyrobo
   # [[][][][][]]
   # [[0,0][][][][]]
   class Table
-    attr_reader :store
+    attr_reader :height, :width
 
     def initialize(height = 5, width = 5)
-      row = Array.new(width) { 0 }
-      @store = Array.new(height) { row }
+      @height = (0..height)
+      @width = (0..width)
     end
 
     # Only Positive integers
     def get(x_coor, y_coor)
-      inner_index = x_coor
-      outer_index = (@store.length - 1) - y_coor
-
-      return if [inner_index, outer_index].any?(&:negative?)
-
-      @store.dig(outer_index, inner_index)
+      return 0 if [height.cover?(y_coor), width.cover?(x_coor)].all?
     end
   end
 end

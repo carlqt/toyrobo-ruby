@@ -21,22 +21,13 @@ module Toyrobo
       validate!
 
       File.foreach(@filename) do |f|
-        command_parser = Toyrobo::Lexer.new(f)
-        @tokens += command_parser.tokens
+        lexer = Toyrobo::Lexer.new(f)
+        parse_tree = Toyrobo::Parser.new(lexer.tokens)
+        Toyrobo::Interpreter.new(parse_tree.nodes, robot).run
       end
-
-      interpreter.run
     end
 
     private
-
-    def parser
-      @parser ||= Toyrobo::Parser.new(@tokens.flatten)
-    end
-
-    def interpreter
-      @interpreter ||= Toyrobo::Interpreter.new(parser.nodes, robot)
-    end
 
     def validate_table_dimensions
       return if Toyrobo::Validations::TableDimensionsValidation.valid?(@table_dimensions)
