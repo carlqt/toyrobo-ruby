@@ -15,4 +15,4 @@ gem "rubocop", "~> 1.21"
 
 gem "steep", require: false
 
-gem "profile"
+gem "ruby-prof"
