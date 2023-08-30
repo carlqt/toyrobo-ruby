@@ -13,7 +13,8 @@ module Toyrobo
     ORIENTATION_RANGES: {north: Integer, east: Integer, south: Integer, west: Integer}
     COUNTER_CLOCKWISE: Integer
     CLOCKWISE: Integer
-    @plane: untyped
+    @plane: Toyrobo::Table
+    @current_position: { x_position: Integer, y_position: Integer, orientation: :east | :north | :south | :west }
 
     attr_reader orientation: :east | :north | :south | :west
     attr_reader x_position: Integer

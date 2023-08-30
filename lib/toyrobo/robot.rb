@@ -17,39 +17,45 @@ module Toyrobo
     COUNTER_CLOCKWISE = -1
     CLOCKWISE = 1
 
-    attr_reader :orientation, :x_position, :y_position
-
     private_constant :COUNTER_CLOCKWISE, :CLOCKWISE
+
+    attr_reader :current_position
 
     # Plane = cartesian_plane like object
     # Any structure the has a "get" function
     def initialize(plane = Toyrobo::Table.new)
       @plane = plane
-      @orientation = :north
-      @x_position = 0
-      @y_position = 0
+      @current_position = {
+        x_position: 0,
+        y_position: 0,
+        orientation: :north
+      }
     end
 
-    def current_position
-      {
-        x_position: @x_position,
-        y_position: @y_position,
-        orientation:
-      }
+    def orientation
+      current_position[:orientation]
+    end
+
+    def x_position
+      current_position[:x_position]
+    end
+
+    def y_position
+      current_position[:y_position]
     end
 
     def place(x_coor, y_coor, direction)
       raise Robots::LocationOutOfBoundsError if @plane.get(x_coor, y_coor).nil?
 
-      @x_position = x_coor
-      @y_position = y_coor
-      @orientation = direction
+      @current_position[:x_position] = x_coor
+      @current_position[:y_position] = y_coor
+      @current_position[:orientation] = direction
 
       current_position
     end
 
     def report
-      "OUTPUT: #{@x_position},#{@y_position},#{orientation.upcase}"
+      "OUTPUT: #{x_position},#{y_position},#{orientation.upcase}"
     end
 
     # Orientation Ranges
@@ -80,13 +86,7 @@ module Toyrobo
       current_index = ORIENTATIONS.index(orientation) # : Integer
 
       new_index = (current_index + numeric_direction) % ORIENTATIONS.size
-      self.orientation = ORIENTATIONS[new_index]
-    end
-
-    def orientation=(val)
-      @orientation = val
-
-      current_position
+      @current_position[:orientation] = ORIENTATIONS[new_index]
     end
   end
 end
