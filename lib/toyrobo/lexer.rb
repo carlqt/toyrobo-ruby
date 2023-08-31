@@ -22,9 +22,14 @@ module Toyrobo
     def tokenize
       cmd, args = @input.split(" ")
 
-      raise(Lexers::NoCommandError, cmd) if cmd.nil? || Lexers::Token::COMMANDS[cmd.to_sym].nil?
+      # raise(Lexers::NoCommandError, cmd) if cmd.nil? || Lexers::Token::COMMANDS[cmd.to_sym].nil?
 
-      @tokens << Lexers::Token.new(:command, cmd)
+      @tokens << if cmd.nil? || Lexers::Token::COMMANDS[cmd.to_sym].nil?
+                   Lexers::Token.new(:unknown, "")
+                 else
+                   Lexers::Token.new(:command, cmd)
+                 end
+
       @tokens.push(*tokenize_params(args)) unless args.nil?
 
       @tokens

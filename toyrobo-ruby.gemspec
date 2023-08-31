@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name = "toyrobo-ruby"
-  spec.version = "0.1.0"
+  spec.version = "0.2.0"
   spec.authors = ["Carl Tablante"]
   spec.email = ["carlwilliam.tablante@gmail.com"]
 

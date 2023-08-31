@@ -23,10 +23,10 @@ module Toyrobo
 
       File.foreach(@filename) do |f|
         lexer = Toyrobo::Lexer.new(f)
-        tokens = lexer.tokens
+        left_most_token = lexer.tokens[0]
 
-        @start_command_flag = true if tokens[0].place?
-        next unless @start_command_flag
+        @start_command_flag = true if left_most_token.place?
+        next if !@start_command_flag || left_most_token.type == :unknown
 
         parse_tree = Toyrobo::Parser.new(lexer.tokens)
 

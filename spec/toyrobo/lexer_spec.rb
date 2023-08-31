@@ -37,9 +37,17 @@ RSpec.describe Toyrobo::Lexer do
     context "when input contains unknown command" do
       let(:input) { "FLY" }
 
-      it "raises NoCommandError error" do
-        expect { tokenize }.to raise_error(Toyrobo::Lexers::NoCommandError)
+      it "returns a single element array that contains a Lexer::Token of type unknown" do
+        tokens = subject
+        token = tokens[0]
+
+        expect(token.type).to eq :unknown
+        expect(tokens.count).to eq 1
       end
+
+      # it "raises NoCommandError error" do
+      #   expect { tokenize }.to raise_error(Toyrobo::Lexers::NoCommandError)
+      # end
     end
   end
 end

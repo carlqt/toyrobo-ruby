@@ -26,9 +26,13 @@ RSpec.describe Toyrobo::Runner do
     context "when file is input3.txt" do
       let(:input) { File.join(File.dirname(__FILE__), "../fixtures/runner/input3.txt") }
 
-      it "raises NoCommandError" do
-        expect { run }.to raise_error(Toyrobo::Lexers::NoCommandError)
+      it "returns empty string in stdout" do
+        expect { run }.to output("").to_stdout
       end
+
+      # it "raises NoCommandError" do
+      #   expect { run }.to raise_error(Toyrobo::Lexers::NoCommandError)
+      # end
     end
 
     context "when file is input4.txt" do

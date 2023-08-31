@@ -15,7 +15,8 @@ module Toyrobo
       TYPES = {
         command: :command,
         num: :num,
-        string: :string
+        string: :string,
+        unknown: :unknown
       }.freeze
 
       attr_accessor :type, :text, :args
