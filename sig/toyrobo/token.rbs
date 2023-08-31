@@ -11,6 +11,7 @@ module Toyrobo
       attr_accessor text: String
       attr_accessor args: untyped
       def initialize: (Symbol, String) -> void
+      def place?: -> boolish
     end
   end
 end

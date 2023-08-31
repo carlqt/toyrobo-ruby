@@ -25,8 +25,7 @@ module Toyrobo
         lexer = Toyrobo::Lexer.new(f)
         tokens = lexer.tokens
 
-        @start_command_flag = true if tokens[0].text == 'place'
-
+        @start_command_flag = true if tokens[0].place?
         next unless @start_command_flag
 
         parse_tree = Toyrobo::Parser.new(lexer.tokens)

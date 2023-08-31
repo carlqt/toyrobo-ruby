@@ -24,6 +24,10 @@ module Toyrobo
         @type = type
         @text = text
       end
+
+      def place?
+        @type == :command && @text == "place"
+      end
     end
   end
 end
