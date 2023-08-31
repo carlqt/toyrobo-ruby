@@ -47,6 +47,14 @@ RSpec.describe Toyrobo::Runner do
       end
     end
 
+    context "when the PLACE command is in the middle" do
+      let(:input) { File.join(File.dirname(__FILE__), "../fixtures/runner/input6.txt") }
+
+      it "discards all other commands until a valid PLACE command is found" do
+        expect { run }.to output("OUTPUT: 0,0,NORTH\n").to_stdout
+      end
+    end
+
     context "when file does not exist" do
       let(:input) { "unknown.txt" }
 

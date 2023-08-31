@@ -14,6 +14,7 @@ module Toyrobo
     def initialize(options)
       @filename = options[:filename]
       @table_dimensions = options[:dimensions] || "5x5"
+      @start_command_flag = false
       @tokens = []
     end
 
@@ -22,7 +23,15 @@ module Toyrobo
 
       File.foreach(@filename) do |f|
         lexer = Toyrobo::Lexer.new(f)
+        tokens = lexer.tokens
+
+        @start_command_flag = true if tokens[0].text == 'place'
+
+        next unless @start_command_flag
+
         parse_tree = Toyrobo::Parser.new(lexer.tokens)
+
+        # Start interpreting only if PLACE command is executed
         Toyrobo::Interpreter.new(parse_tree.nodes, robot).run
       end
     end
