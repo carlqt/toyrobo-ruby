@@ -13,22 +13,21 @@ module Toyrobo
   # STRING - Represents anything that is not a number. Same use as NUM
   class Lexer
     def initialize(input_string)
-      @input = input_string.split("\n")
+      @input = input_string.strip.downcase
       @tokens = []
     end
 
     # The implementation always assumes that there are only 2 section of the input, the command and arguments.
+    # Note: This can be optimized by only calling downcase on the cmd var
     def tokenize
-      @input.each do |text|
-        cmd, args = text.split(" ")
+      cmd, args = @input.split(" ")
 
-        raise(Lexers::NoCommandError, cmd) if cmd.nil? || Lexers::Token::COMMANDS[cmd.downcase.to_sym].nil?
+      raise(Lexers::NoCommandError, cmd) if cmd.nil? || Lexers::Token::COMMANDS[cmd.to_sym].nil?
 
-        @tokens << Lexers::Token.new(:command, cmd.downcase)
-        @tokens += tokenize_params(args) unless args.nil?
-      end
+      @tokens << Lexers::Token.new(:command, cmd)
+      @tokens.push(*tokenize_params(args)) unless args.nil?
 
-      @tokens.flatten
+      @tokens
     end
 
     def tokenize_params(params_string)

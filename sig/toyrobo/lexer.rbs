@@ -3,7 +3,7 @@
 # Classes
 module Toyrobo
   class Lexer
-    @input: Array[String]
+    @input: String
     @tokens: Array[Lexers::Token]
 
     def initialize: (String input_string) -> void
