@@ -8,7 +8,7 @@ module Toyrobo
 
       def initialize(value, type)
         @value = value
-        @type = type.downcase
+        @type = type
       end
     end
   end
