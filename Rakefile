@@ -12,7 +12,12 @@ require "rubocop/rake_task"
 
 RuboCop::RakeTask.new
 
-task default: %i[spec rubocop]
+task default: %i[spec rubocop steep]
+
+desc "Runs Steep for typechecking"
+task :steep do
+  sh "steep check"
+end
 
 desc 'Runs profiler and store in ./tmp/profile.txt e.g rake "profile[input.txt, 12x12]"'
 task :profile, [:filename, :dimensions] do |_, args|
