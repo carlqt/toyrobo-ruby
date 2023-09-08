@@ -10,7 +10,8 @@ module Toyrobo
     def run: -> Array[AST::Command]
     def pending_tokens?: -> untyped
     def parse_arguments: (AST::Command command_node) -> Array[AST::Command]
-    def consume: -> untyped
+    def consume: -> Lexers::Token?
     def nodes: -> Array[AST::Command]
+    def args: -> Array[AST::Num | AST::String]
   end
 end

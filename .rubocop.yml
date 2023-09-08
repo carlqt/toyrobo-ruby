@@ -4,6 +4,7 @@ AllCops:
     - "bin/*"
     - "Steepfile"
     - "vendor/**/*"
+    - "parse.rb"
 
 Metrics/BlockLength:
   Enabled: false
