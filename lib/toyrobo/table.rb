@@ -32,7 +32,7 @@ module Toyrobo
 
     def obstructed?(x_coor, y_coor)
       @obstacle.find do |points|
-        points[0] == x_coor && points[1] == y_coor
+        points[0].to_i == x_coor && points[1].to_i == y_coor
       end
     end
   end

@@ -7,6 +7,16 @@ RSpec.describe Toyrobo::Runner do
   describe "#run" do
     subject(:run) { runner.run }
 
+    context "when file is input7.txt && the table have obstacles" do
+      let(:options) { { filename:, obstacles: "1-3,4-4" } }
+      let(:filename) { File.join(File.dirname(__FILE__), "../fixtures/runner/input7.txt") }
+
+      it "returns OUTPUT: 1,2,north" do
+        # expect { run }.to output("OUTPUT: 1,2,NORTH\n").to_stdout
+        expect { run }.to raise_error(Toyrobo::Robots::LocationOutOfBoundsError)
+      end
+    end
+
     context "when file is input1.txt" do
       let(:input) { File.join(File.dirname(__FILE__), "../fixtures/runner/input1.txt") }
 

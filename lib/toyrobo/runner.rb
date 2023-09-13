@@ -14,6 +14,10 @@ module Toyrobo
     def initialize(options)
       @filename = options[:filename]
       @table_dimensions = options[:dimensions] || "5x5"
+
+      # A string with an expected format of 1-2,3-4
+      @obstacle_inputs = options[:obstacles] || ""
+
       @start_command_flag = false
       @tokens = []
     end
@@ -50,7 +54,13 @@ module Toyrobo
     def table
       length, width = @table_dimensions.split("x").map(&:to_i)
 
-      Toyrobo::Table.new(length || 5, width || 5)
+      Toyrobo::Table.new(length || 5, width || 5, obstacles)
+    end
+
+    # Returns an array of tuples
+    def obstacles
+      obs = @obstacle_inputs.split(",") # [1-2, 3-4]
+      obs.map { |o| o.split("-") } # [["1", "2"], ["3", "4"]]
     end
 
     def validate_file
