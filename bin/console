@@ -13,75 +13,9 @@ require "toyrobo/lexer"
 
 def robot
   t = Toyrobo::Table.new(5,5, [[1,1]])
-  Toyrobo::Robot.new(t)
-end
-
-DIRS = [[0, 1], [0,-1], [1, 0], [-1, 0]]
-
-m = Toyrobo::Table.new(5,5, [[1,1]]) 
-
-def bfs(map = "5x5", start, target)
-  width = map.width.max
-  height = map.height.max
-
-  # We use a visited list so that we check each location only once
-  # Without this we'd revisit the same locations multiple times and our
-  # queue would be very large.
-  visited = Set.new
-
-  # The "trick" to my approach that I wanted to share is that my queue is two
-  # arrays, "queue" and "next_queue", which allow us to track our steps without
-  # extra work.
-  # We will be reading each item from "queue" to get our "current" location,
-  # and pushing the next steps onto "next_queue".
-  # We start with our queue only including the initial position.
-  queue = [start]
-  next_queue = []
-
-  steps = 0
-
-  while !queue.empty?
-    # Loop over each item in queue
-    queue.each do |pos|
-      x, y = pos
-
-      # Have we already visited this position? If so, skip it
-      next if visited.include?(pos)
-      visited.add(pos)
-
-      # Is this a "wall" in the maze? If so, skip it
-      next if map.get(x,y).nil?
-
-      # Have we reached our target? If so, return how many steps we've taken
-      return [steps, visited] if target == pos
-
-      # Try to take another step in each cardinal direction
-      DIRS.each do |(dx, dy)|
-        nx, ny = x + dx, y + dy
-
-        # Check that our next step is in bounds
-        next if nx < 0 || ny < 0
-        next if nx >= width || ny >= height
-
-        # Add our next step to next_queue. There may be duplicates, but we'll
-        # sort that out with the visited list when we see it.
-        # Keep in mind we'll process everything in "queue" before we start
-        # looking at "next_queue".
-        next_queue << [nx, ny]
-      end
-    end
-
-    # Here's where we swap the queues, we start processing what was next_queue,
-    # and replace next_queue with a new empty queue.
-    queue, next_queue = next_queue, queue.clear
-
-    # Because we process all of queue before next_queue, and this is a BFS, we
-    # are looking at our steps in order. As we swap the queues, we increment
-    # the steps.
-    steps += 1
-  end
-
-  # If we get here... the maze is unsolvable :(
+  r = Toyrobo::Robot.new(t)
+  r.place(1,3, :north)
+  r
 end
 
 Pry.start(__FILE__)

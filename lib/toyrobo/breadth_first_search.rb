@@ -1,61 +1,75 @@
 # frozen_string_literal: true
 
-class BreadthFirstSearch
-  def initialize(graph, source_node)
-    @graph = graph
-    @node = source_node
-    @visited = []
-    @edge_to = {}
+# rubocop:disable Metrics
+module Toyrobo
+  # Reference -> https://www.johnhawthorn.com/2022/breadth-first-search-in-ruby/
+  class BFS
+    DIRS = [[0, 1], [0, -1], [1, 0], [-1, 0]].freeze
 
-    bfs(source_node)
-  end
+    def self.start(map, start, target)
+      width = map.width.max
+      height = map.height.max
 
-  def shortest_path_to(node)
-    return unless has_path_to?(node)
+      # We use a visited list so that we check each location only once
+      # Without this we'd revisit the same locations multiple times and our
+      # queue would be very large.
+      visited = Set.new
 
-    path = []
+      # The "trick" to my approach that I wanted to share is that my queue is two
+      # arrays, "queue" and "next_queue", which allow us to track our steps without
+      # extra work.
+      # We will be reading each item from "queue" to get our "current" location,
+      # and pushing the next steps onto "next_queue".
+      # We start with our queue only including the initial position.
+      queue = [start]
+      next_queue = []
 
-    while node != @node
-      path.unshift(node) # unshift adds the node to the beginning of the array
-      node = @edge_to[node]
-    end
+      steps = 0
 
-    path.unshift(@node)
-  end
+      until queue.empty?
+        # Loop over each item in queue
+        queue.each do |pos|
+          x, y = pos
 
-  private
+          # Have we already visited this position? If so, skip it
+          next if visited.include?(pos)
 
-  def bfs(node)
-    # Remember, in the breadth first search we always
-    # use a queue. In ruby we can represent both
-    # queues and stacks as an Array, just by using
-    # the correct methods to deal with it. In this case,
-    # we use the "shift" method to remove an element
-    # from the beginning of the Array.
+          visited.add(pos)
 
-    # First step: Put the source node into a queue and mark it as visited
-    queue = []
-    queue << node
-    @visited << node
+          # Is this a "wall" in the maze? If so, skip it
+          next if map.get(x, y).nil?
 
-    # Second step: Repeat until the queue is empty:
-    # - Remove the least recently added node n
-    # - add each of n's unvisited adjacents to the queue and mark them as visited
-    while queue.any?
-      current_node = queue.shift # remove first element
-      current_node.adjacents.each do |adjacent_node|
-        next if @visited.include?(adjacent_node)
+          # Have we reached our target? If so, return how many steps we've taken
+          return visited if target == pos
 
-        queue << adjacent_node
-        @visited << adjacent_node
-        @edge_to[adjacent_node] = current_node
+          # Try to take another step in each cardinal direction
+          DIRS.each do |(dx, dy)|
+            nx = x + dx
+            ny = y + dy
+
+            # Check that our next step is in bounds
+            next if nx.negative? || ny.negative?
+            next if nx >= width || ny >= height
+            next if map.get(nx, ny).nil?
+
+            # Add our next step to next_queue. There may be duplicates, but we'll
+            # sort that out with the visited list when we see it.
+            # Keep in mind we'll process everything in "queue" before we start
+            # looking at "next_queue".
+            next_queue << [nx, ny]
+          end
+        end
+
+        # Here's where we swap the queues, we start processing what was next_queue,
+        # and replace next_queue with a new empty queue.
+        queue, next_queue = next_queue, queue.clear
+
+        # Because we process all of queue before next_queue, and this is a BFS, we
+        # are looking at our steps in order. As we swap the queues, we increment
+        # the steps.
+        steps += 1
       end
     end
   end
-
-  # If we visited the node, so there is a path
-  # from our source node to it.
-  def has_path_to?(node)
-    @visited.include?(node)
-  end
 end
+# rubocop:enable Metrics

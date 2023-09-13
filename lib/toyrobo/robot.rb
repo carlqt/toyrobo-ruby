@@ -3,58 +3,6 @@
 require_relative "robots/location_out_of_bounds_error"
 require_relative "breadth_first_search"
 
-class TreeNode
-  attr_accessor :x_position, :y_position
-
-  def initialize(x_position, y_position)
-    @x_position = x_position
-    @y_position = y_position
-  end
-
-  def equal?(other)
-    other.x_position == x_position && other.y_position == y_position
-  end
-
-  # []
-  def adjacents
-    a = [
-      up,
-      down,
-      left,
-      right
-    ].compact
-
-    binding.pry if y_position == 5 && x_position == 5
-
-    a.empty? ? [] : a
-  end
-
-  def up
-    return nil unless (0..3).cover?(y_position + 1)
-
-    @up ||= TreeNode.new(x_position, y_position + 1)
-  end
-
-  def down
-    return nil unless (0..5).cover?(y_position - 1)
-
-    @down ||= TreeNode.new(x_position, y_position - 1)
-  end
-
-  def left
-    return nil unless (0..5).cover?(x_position - 1)
-
-    @left ||= TreeNode.new(x_position - 1, y_position)
-  end
-
-  def right
-    return nil unless (0..5).cover?(x_position + 1)
-
-    @right ||= TreeNode.new(x_position + 1, y_position)
-  end
-end
-
-
 module Toyrobo
   # Robot class represents a robot object. The robot object can move and spawn on the plane
   class Robot
@@ -111,15 +59,12 @@ module Toyrobo
       "OUTPUT: #{x_position},#{y_position},#{orientation.upcase}"
     end
 
+    # Returns the all the coordinates that were visited to get to the target
     def goal(x_coor, y_coor)
-      root = TreeNode.new(x_position, y_position)
+      start = [x_position, y_position]
+      target = [x_coor, y_coor]
 
-      # Takes too long to initialize
-      bfs = BreadthFirstSearch.new({}, root)
-      # Returns a set of points/path the robot will take Avoid colliding with an obstacle
-      # Current point -> 0,0
-      # End point -> 2,2
-      # Paths -> 0,1 - 0, 2 - 1,2 - 2,2
+      puts Toyrobo::BFS.start(@plane, start, target)
     end
 
     # Orientation Ranges
