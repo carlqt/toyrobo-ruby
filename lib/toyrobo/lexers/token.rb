@@ -9,7 +9,8 @@ module Toyrobo
         move: :move,
         left: :left,
         right: :right,
-        report: :report
+        report: :report,
+        goal: :goal
       }.freeze
 
       TYPES = {

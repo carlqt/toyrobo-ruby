@@ -10,7 +10,10 @@ require "toyrobo/lexer"
 
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
-t = Toyrobo::Table.new(5,5)
-r = Toyrobo::Robot.new(t)
+
+def robot
+  t = Toyrobo::Table.new(5,5, [[1,1]])
+  Toyrobo::Robot.new(t)
+end
 
 Pry.start(__FILE__)
