@@ -23,6 +23,7 @@ module Toyrobo
       # We start with our queue only including the initial position.
       queue = [start]
       next_queue = []
+      prev = {}
 
       steps = 0
 
@@ -40,7 +41,7 @@ module Toyrobo
           next if map.get(x, y).nil?
 
           # Have we reached our target? If so, return how many steps we've taken
-          return visited if target == pos
+          return prev if target == pos
 
           # Try to take another step in each cardinal direction
           DIRS.each do |(dx, dy)|
@@ -51,11 +52,20 @@ module Toyrobo
             next if nx.negative? || ny.negative?
             next if nx >= width || ny >= height
             next if map.get(nx, ny).nil?
+            next if visited.include?([nx, ny])
 
             # Add our next step to next_queue. There may be duplicates, but we'll
             # sort that out with the visited list when we see it.
             # Keep in mind we'll process everything in "queue" before we start
             # looking at "next_queue".
+            # prev[[nx,ny]] = pos
+
+            if prev[[nx, ny]].nil?
+              prev[[nx, ny]] = [pos]
+            else
+              prev[[nx, ny]] << pos
+            end
+
             next_queue << [nx, ny]
           end
         end

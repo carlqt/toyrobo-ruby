@@ -12,9 +12,7 @@ RSpec.describe Toyrobo::Runner do
       let(:filename) { File.join(File.dirname(__FILE__), "../fixtures/runner/input8.txt") }
 
       it "returns all the coordinates that was visited by the robot" do
-        # expect { run }.to output("OUTPUT: 1,2,NORTH\n").to_stdout
-
-        expect { run }.to output("#<Set: {[1, 2], [1, 3], [2, 2], [0, 2], [1, 4], [2, 3]}>\n").to_stdout
+        expect { run }.to output("[[1, 2], [1, 3], [2, 3]]\n").to_stdout
       end
     end
 

@@ -64,7 +64,10 @@ module Toyrobo
       start = [x_position, y_position]
       target = [x_coor, y_coor]
 
-      puts Toyrobo::BFS.start(@plane, start, target)
+      # Converting the set to an array
+      paths = Toyrobo::BFS.start(@plane, start, target)
+
+      puts trace_paths(paths, [x_coor, y_coor]).inspect
     end
 
     # Orientation Ranges
@@ -90,6 +93,19 @@ module Toyrobo
     end
 
     private
+
+    def trace_paths(paths, start)
+      # paths -> Hash[[Integer, Integer], [Integer, Integer]]
+      s = start.dup
+      result = [s]
+
+      until paths[s].nil?
+        s = paths[s].first
+        result << s
+      end
+
+      result.reverse
+    end
 
     def turn(numeric_direction)
       current_index = ORIENTATIONS.index(orientation) # : Integer
