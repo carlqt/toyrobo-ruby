@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "robots/location_out_of_bounds_error"
+require_relative "breadth_first_search"
 
 module Toyrobo
   # Robot class represents a robot object. The robot object can move and spawn on the plane
@@ -58,6 +59,17 @@ module Toyrobo
       "OUTPUT: #{x_position},#{y_position},#{orientation.upcase}"
     end
 
+    # Returns the all the coordinates that were visited to get to the target
+    def goal(x_coor, y_coor)
+      start = [x_position, y_position]
+      target = [x_coor, y_coor]
+
+      # Converting the set to an array
+      paths = Toyrobo::BFS.start(@plane, start, target)
+
+      puts trace_paths(paths, [x_coor, y_coor]).inspect
+    end
+
     # Orientation Ranges
     def move
       range = ORIENTATION_RANGES[orientation]
@@ -81,6 +93,19 @@ module Toyrobo
     end
 
     private
+
+    def trace_paths(paths, start)
+      # paths -> Hash[[Integer, Integer], [Integer, Integer]]
+      s = start.dup
+      result = [s]
+
+      until paths[s].nil?
+        s = paths[s].first
+        result << s
+      end
+
+      result.reverse
+    end
 
     def turn(numeric_direction)
       current_index = ORIENTATIONS.index(orientation) # : Integer

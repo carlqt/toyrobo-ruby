@@ -17,6 +17,8 @@ OptionParser.new do |parser|
 
   parser.on("-d", "--dimensions TABLE_DIMENSIONS", "Provide the table dimension e.g. 5x5. If not provided, the default is 5x5")
 
+  parser.on("-o", "--obstacles TABLE_OBSTACLES", "Provide the table obstalces e.g. 0-1,0-2")
+
   parser.on("-h", "--help", "Show this message") do
     puts parser
     exit

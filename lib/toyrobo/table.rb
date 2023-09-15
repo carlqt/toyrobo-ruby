@@ -9,14 +9,31 @@ module Toyrobo
   class Table
     attr_reader :height, :width
 
-    def initialize(height = 5, width = 5)
+    def initialize(height = 5, width = 5, obstacle = [])
       @height = (0..height)
       @width = (0..width)
+      @obstacle = obstacle
     end
 
     # Only Positive integers
     def get(x_coor, y_coor)
-      return 0 if [height.cover?(y_coor), width.cover?(x_coor)].all?
+      # If the coords parameters are within the dimensions
+      # but the coords hit an obstacle then return nil
+
+      # else 0
+
+      if [height.cover?(y_coor), width.cover?(x_coor)].all?
+        return nil if obstructed?(x_coor, y_coor)
+
+        return 0
+        # if not in an obstacle? return 0
+      end
+    end
+
+    def obstructed?(x_coor, y_coor)
+      @obstacle.find do |points|
+        points[0].to_i == x_coor && points[1].to_i == y_coor
+      end
     end
   end
 end

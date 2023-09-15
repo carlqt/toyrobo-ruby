@@ -15,5 +15,14 @@ RSpec.describe Toyrobo::Table do
 
       it { is_expected.to eq 0 }
     end
+
+    context "when an obstacle is hit" do
+      subject(:get) { table.get(3, 4) }
+
+      let(:obstacle) { [[1,2], [3,4]]}
+      let(:table) { described_class.new(5, 5, obstacle) }
+
+      it { is_expected.to eq nil }
+    end
   end
 end
