@@ -15,4 +15,6 @@ gem "rubocop", "~> 1.21"
 
 gem "steep", require: false
 
+gem "anyway_config"
+
 gem "memory_profiler"

@@ -11,6 +11,8 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
+    anyway_config (2.6.3)
+      ruby-next-core (~> 1.0)
     ast (2.4.2)
     concurrent-ruby (1.2.2)
     csv (3.2.7)
@@ -66,6 +68,7 @@ GEM
       unicode-display_width (>= 2.4.0, < 3.0)
     rubocop-ast (1.29.0)
       parser (>= 3.2.1.0)
+    ruby-next-core (1.0.3)
     ruby-progressbar (1.13.0)
     securerandom (0.2.2)
     steep (1.5.3)
@@ -92,9 +95,11 @@ GEM
 
 PLATFORMS
   arm64-darwin-22
+  arm64-darwin-23
   x86_64-linux
 
 DEPENDENCIES
+  anyway_config
   memory_profiler
   rake (~> 13.0)
   rspec (~> 3.0)
