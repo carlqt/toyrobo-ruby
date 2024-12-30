@@ -16,7 +16,7 @@ module Toyrobo
 
     # Only Positive integers
     def get(x_coor, y_coor)
-      return 0 if [height.cover?(y_coor), width.cover?(x_coor)].all?
+      0 if [height.cover?(y_coor), width.cover?(x_coor)].all?
     end
   end
 end
